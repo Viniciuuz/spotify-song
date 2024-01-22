@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        body{
+            background-color: black;
+            color: white;
+        }
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+    <div>
+        <div id="info-card" class="flex items-left p-2 bg-black w-5/12 rounded">
+            <img id="info-cover" src="" class="rounded" alt="" srcset="">
+
+            <div id="info">
+                <p id="info-song" class="ml-2 text-xl font-bold"></p>
+                <p id="info-artist" class="ml-2 font-bold"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const seconds = 20
+        const username = "viniciuuz"
+        
+        const baseUrl = `http://localhost:4000/api/${username}`
+
+        function fetchCurrent(){
+            $.getJSON(baseUrl, (data) => {
+                $('#info-song').text(data.name)
+                $('#info-artist').text(data.artist)
+                $('#info-cover').attr("src", data.cover);
+            })
+        }
+
+        fetchCurrent()
+
+        setInterval(() => {
+            fetchCurrent()
+        }, seconds * 1000);
+    </script>
+</body>
+</html>
